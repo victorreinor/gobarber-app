@@ -1,10 +1,14 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Text } from 'react-native';
+
+import Background from '~/components/Background';
 
 function SignIn() {
   return (
     <>
-      <View />
+      <Background>
+        <Text>SignIn</Text>
+      </Background>
     </>
   );
 }

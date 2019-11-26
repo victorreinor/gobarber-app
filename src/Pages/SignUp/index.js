@@ -1,12 +1,16 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Text } from 'react-native';
 
-function SignUp() {
+import Background from '~/components/Background';
+
+function SignIn() {
   return (
     <>
-      <View />
+      <Background>
+        <Text>SignUp</Text>
+      </Background>
     </>
   );
 }
 
-export default SignUp;
+export default SignIn;
