@@ -1,9 +1,12 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 import { Image } from 'react-native';
+import { useDispatch } from 'react-redux';
 
 import logo from '~/assets/logo.png';
 
 import Background from '~/components/Background';
+import { singInRequest } from '~/store/modules/auth/actions';
 
 import {
   Container,
@@ -15,9 +18,15 @@ import {
 } from './styles';
 
 function SignIn({ navigation }) {
+  const dispatch = useDispatch();
   const passwordRef = useRef();
 
-  function handleSubmit() {}
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  function handleSubmit() {
+    dispatch(singInRequest(email, password));
+  }
 
   return (
     <Background>
@@ -33,6 +42,8 @@ function SignIn({ navigation }) {
             placeholder="Digite seu e-mail"
             returnKeyType="next"
             onSubmitEditing={() => passwordRef.current.focus()}
+            value={email}
+            onChangeText={setEmail}
           />
 
           <FormInput
@@ -42,9 +53,11 @@ function SignIn({ navigation }) {
             ref={passwordRef}
             returnKeyType="send"
             onSubmitEditing={handleSubmit}
+            value={password}
+            onChangeText={setPassword}
           />
 
-          <SubmitButton>Acessar</SubmitButton>
+          <SubmitButton onPress={handleSubmit}>Acessar</SubmitButton>
         </Form>
 
         <SignLink onPress={() => navigation.navigate('SignUp')}>
@@ -54,5 +67,9 @@ function SignIn({ navigation }) {
     </Background>
   );
 }
+
+SignIn.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
 
 export default SignIn;
